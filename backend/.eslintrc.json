@@ -21,6 +21,13 @@
   "plugins": ["@typescript-eslint", "prettier"],
   "rules": {
     "@typescript-eslint/indent": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "_"
+      }
+    ],
     "class-methods-use-this": "off",
     "prettier/prettier": "error",
     "import/extensions": [

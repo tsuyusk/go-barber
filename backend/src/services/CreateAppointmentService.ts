@@ -1,11 +1,13 @@
+/* eslint-disable camelcase */
 import { startOfHour } from 'date-fns';
 import { getCustomRepository } from 'typeorm';
 
+import AppError from '../errors/AppError';
 import Appointment from '../models/Appointment';
 import AppointmentsRepository from '../repositories/AppointmentsRepository';
 
 interface RequestDTO {
-  provider: string;
+  provider_id: string;
   date: Date;
 }
 
@@ -25,22 +27,25 @@ class CreateAppointmentService {
     this.appointmentsRepository = appointmentsRepository;
   } */
 
-  public async execute({ provider, date }: RequestDTO): Promise<Appointment> {
+  public async execute({
+    date,
+    provider_id,
+  }: RequestDTO): Promise<Appointment> {
     const appointmentDate = startOfHour(date);
 
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
-    const findAppointmeintInSameDate = appointmentsRepository.findByDate(
+    const findAppointmeintInSameDate = await appointmentsRepository.findByDate(
       appointmentDate,
     );
 
     // Se existe uma data já marcada no mesmo tempo, retorna erro
     if (findAppointmeintInSameDate) {
-      throw Error('This appointment is already booked');
+      throw new AppError('This appointment is already booked');
     }
 
     const appointment = appointmentsRepository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     });
 
