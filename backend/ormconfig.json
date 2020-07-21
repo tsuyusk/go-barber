@@ -1,13 +1,13 @@
 {
   "type": "postgres",
-  "host": "127.0.0.1",
+  "host": "localhost",
   "port": 5432,
-  "username": "gitpod",
-  "database": "postgres",
+  "username": "postgres",
+  "database": "gostack_gobarber",
   "password": "docker",
-  "entities": ["./src/models/*.ts"],
-  "migrations": ["./src/database/migrations/*.ts"],
+  "entities": ["./src/modules/**/infra/typeorm/entities/*.ts"],
+  "migrations": ["./src/shared/infra/typeorm/migrations/*.ts"],
   "cli": {
-    "migrationsDir": "./src/database/migrations"
+    "migrationsDir": "./src/shared/infra/typeorm/migrations"
   }
 }
