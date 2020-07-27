@@ -1,0 +1,42 @@
+import { getMongoRepository, MongoRepository } from 'typeorm';
+
+import ICreateNotificationDTO from '@modules/notifications/dtos/ICreateNotificationDTO';
+import INotificationsRepository from '@modules/notifications/repositories/INotificationsRepository';
+import Notification from '@modules/notifications/infra/typeorm/schemas/Notification';
+
+/**
+ * Repositorio: Conexão entre a persistência dos dados e a rota
+ * No repositório, podemos ter um metodo
+ *  * find -> Que encontra um dado
+ *  * Create -> Que cria uma informação
+ * Normalmente, temos um repositório por model
+ */
+
+// Data transfer object
+
+/* interface CreateAppointmentDTO {
+  provider: string;
+  date: Date;
+}
+ */
+class NotificationsRepository implements INotificationsRepository {
+  private ormRepository: MongoRepository<Notification>;
+  constructor() {
+    this.ormRepository = getMongoRepository(Notification, 'mongo');
+  }
+  public async create({
+    recipient_id,
+    content,
+  }: ICreateNotificationDTO): Promise<Notification> {
+    const notification = this.ormRepository.create({
+      recipient_id,
+      content,
+    });
+
+    await this.ormRepository.save(notification);
+
+    return notification;
+  }
+}
+
+export default NotificationsRepository;
