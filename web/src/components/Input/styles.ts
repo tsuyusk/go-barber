@@ -19,7 +19,7 @@ export const Container = styled.div<ContainerProps>`
   display: flex;
   align-items: center;
 
-  transition: color, border-color 0.5s;
+  transition: all 0.5s ease;
 
   & + div {
     margin-top: 8px;

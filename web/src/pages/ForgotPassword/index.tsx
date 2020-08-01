@@ -1,32 +1,31 @@
-import React, { useCallback, useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
+import React, { useCallback, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { FiMail } from 'react-icons/fi';
 
 import * as yup from 'yup';
 import getValidationError from '../../utils/getValidationErrors';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 
-import { useAuth } from '../../hooks/auth';
 import { useToast } from '../../hooks/toast';
+import api from '../../services/api';
 import Logo from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Container, Content, Background, AnimationContainer } from './styles';
 
-interface SignInFormData {
+interface ForgotPasswordFormData {
   email: string;
-  password: string;
 }
 
-const SignIn: React.FC = () => {
+const ForgotPassword: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
   const formRef = useRef<FormHandles | null>(null);
-  const { signIn } = useAuth();
   const { addToast } = useToast();
-  const history = useHistory();
   const handleSubmit = useCallback(
-    async (data: SignInFormData) => {
+    async (data: ForgotPasswordFormData) => {
       try {
         formRef.current?.setErrors({});
         const schema = yup.object().shape({
@@ -34,22 +33,24 @@ const SignIn: React.FC = () => {
             .string()
             .required('Email obrigatório')
             .email('Insira um email válido.'),
-          password: yup.string().required('Senha obrigatória'),
         });
 
         await schema.validate(data, {
           abortEarly: false,
         });
 
-        await signIn({
+        setIsLoading(true);
+
+        await api.post('/password/forgot', {
           email: data.email,
-          password: data.password,
         });
+
         addToast({
           type: 'sucess',
-          title: 'Autenticado com sucesso.',
+          title: 'E-mail de recuperação enviado !',
+          description:
+            'Enviamos um E-mail para confirmar sua recuperação de senha, cheque sua caixa de entrada',
         });
-        history.push('/dashboard');
       } catch (error) {
         if (error instanceof yup.ValidationError) {
           const errors = getValidationError(error);
@@ -58,13 +59,15 @@ const SignIn: React.FC = () => {
         }
         addToast({
           type: 'error',
-          title: 'Erro na autenticação',
+          title: 'Erro na recuperação',
           description:
-            'Ocorreu um erro ao fazer a validação, cheque as credenciais',
+            'Ocorreu um erro ao tentar realizar a recuperação de senha, tente ovamente',
         });
+      } finally {
+        setIsLoading(false);
       }
     },
-    [signIn, addToast, history]
+    [addToast]
   );
   return (
     <Container>
@@ -72,7 +75,7 @@ const SignIn: React.FC = () => {
         <AnimationContainer>
           <img src={Logo} alt="Go Barber" />
           <Form ref={formRef} onSubmit={handleSubmit}>
-            <h1>Faça seu logon</h1>
+            <h1>Recuperar senha</h1>
 
             <Input
               icon={FiMail}
@@ -80,21 +83,12 @@ const SignIn: React.FC = () => {
               placeholder="Email"
               type="email"
             />
-            <Input
-              icon={FiLock}
-              name="password"
-              placeholder="senha"
-              type="password"
-            />
+            <Button isLoading={isLoading} type="submit">
+              Recuperar
+            </Button>
 
-            <Button type="submit">Entrar</Button>
-
-            <Link to="/forgot">Esqueci minha senha</Link>
+            <Link to="/">Voltar para o logon</Link>
           </Form>
-          <Link to="/signup">
-            <FiLogIn />
-            Criar conta
-          </Link>
         </AnimationContainer>
       </Content>
       <Background />
@@ -102,4 +96,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default SignIn;
+export default ForgotPassword;
