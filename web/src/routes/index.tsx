@@ -9,8 +9,9 @@ import ResetPassword from '../pages/ResetPassword';
 
 // Private routes
 import Dashboard from '../pages/Dashboard';
+import Profile from '../pages/Profile';
 
-//
+// Useful components
 import Route from './Route';
 
 const Routes: React.FC = () => {
@@ -19,9 +20,10 @@ const Routes: React.FC = () => {
       <Route component={SignIn} exact path="/" />
       <Route component={SignUp} path="/signup" />
       <Route component={ForgotPassword} path="/forgot" />
-      <Route component={ResetPassword} path="/reset-password" />
+      <Route component={ResetPassword} path="/reset_password" />
 
-      <Route component={Dashboard} path="/dashboard" />
+      <Route component={Dashboard} path="/dashboard" isPrivate />
+      <Route component={Profile} path="/profile" isPrivate />
     </Switch>
   );
 };

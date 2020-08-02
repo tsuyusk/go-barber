@@ -48,7 +48,7 @@ const SignIn: React.FC = () => {
           throw new Error();
         }
 
-        await api.post('/password-reset', {
+        await api.post('/passwords/reset', {
           password,
           password_confirmation,
           token,

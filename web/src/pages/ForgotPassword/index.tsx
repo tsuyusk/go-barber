@@ -41,7 +41,7 @@ const ForgotPassword: React.FC = () => {
 
         setIsLoading(true);
 
-        await api.post('/password/forgot', {
+        await api.post('/passwords/forgot', {
           email: data.email,
         });
 

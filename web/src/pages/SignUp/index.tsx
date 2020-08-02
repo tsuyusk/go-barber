@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { FiArrowLeft, FiMail, FiUser, FiLock } from 'react-icons/fi';
 import { Link, useHistory } from 'react-router-dom';
 import { FormHandles } from '@unform/core';
@@ -21,12 +21,14 @@ interface SignUpFormData {
 }
 
 const SignUp: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles | null>(null);
   const history = useHistory();
   const { addToast } = useToast();
   const handleSubmitSignUp = useCallback(
     async (data: SignUpFormData): Promise<void> => {
       try {
+        setLoading(true);
         formRef.current?.setErrors({});
         const schema = yup.object().shape({
           name: yup.string().required('Nome obrigatório'),
@@ -40,7 +42,9 @@ const SignUp: React.FC = () => {
         await schema.validate(data, {
           abortEarly: false,
         });
+
         await api.post('/users', data);
+
         addToast({
           type: 'sucess',
           title: 'Cadastro realizado!',
@@ -48,14 +52,20 @@ const SignUp: React.FC = () => {
         });
         history.push('/');
       } catch (err) {
-        const errors = getValidationErrors(err);
+        if (err instanceof yup.ValidationError) {
+          const errors = getValidationErrors(err);
 
-        formRef.current?.setErrors(errors);
-        addToast({
-          type: 'error',
-          title: 'Erro no cadastro',
-          description: 'Ocorreu um problema no cadastro, tente novamente.',
-        });
+          formRef.current?.setErrors(errors);
+          addToast({
+            type: 'error',
+            title: 'Erro no cadastro',
+            description: 'Ocorreu um problema no cadastro, tente novamente.',
+          });
+        } else {
+          console.log(err);
+        }
+      } finally {
+        setLoading(false);
       }
     },
     [addToast, history]
@@ -83,7 +93,9 @@ const SignUp: React.FC = () => {
               type="password"
             />
 
-            <Button type="submit">Sign up</Button>
+            <Button isLoading={loading} type="submit">
+              Sign up
+            </Button>
           </Form>
           <Link to="/">
             <FiArrowLeft />

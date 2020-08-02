@@ -56,6 +56,7 @@ class CreateAppointmentService {
 
     const findAppointmeintInSameDate = await this.appointmentsRepository.findByDate(
       appointmentDate,
+      provider_id,
     );
 
     // Se existe uma data já marcada no mesmo tempo, retorna erro

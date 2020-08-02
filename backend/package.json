@@ -7,7 +7,7 @@
     "build": "tsc",
     "start": "node dist/server.js",
     "dev:server": "nodemon --exec ts-node -r tsconfig-paths/register --files src/shared/infra/http/server.ts",
-    "start:ts": "ts-node -r tsconfig-paths/register --files src/shared/infra/http/server.ts",
+    "start:ts": "ts-node -r tsconfig-paths/register --transpile-only --files src/shared/infra/http/server.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "jest"
   },

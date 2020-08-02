@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 
@@ -21,6 +21,7 @@ interface SignInFormData {
 }
 
 const SignIn: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const formRef = useRef<FormHandles | null>(null);
   const { signIn } = useAuth();
   const { addToast } = useToast();
@@ -28,6 +29,7 @@ const SignIn: React.FC = () => {
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
       try {
+        setLoading(true);
         formRef.current?.setErrors({});
         const schema = yup.object().shape({
           email: yup
@@ -62,6 +64,8 @@ const SignIn: React.FC = () => {
           description:
             'Ocorreu um erro ao fazer a validação, cheque as credenciais',
         });
+      } finally {
+        setLoading(false);
       }
     },
     [signIn, addToast, history]
@@ -87,7 +91,9 @@ const SignIn: React.FC = () => {
               type="password"
             />
 
-            <Button type="submit">Entrar</Button>
+            <Button isLoading={loading} type="submit">
+              Entrar
+            </Button>
 
             <Link to="/forgot">Esqueci minha senha</Link>
           </Form>
