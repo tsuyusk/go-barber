@@ -67,4 +67,4 @@
 
 **If the mobile version does not work, You might have to replace the baseURL in appgobarber/src/services/api.ts for 'http://[your-ipv4-here]:3333'**
 
-Made with 💜 for Rafael Vinícios
+Made with 💜 by tsuyusk
