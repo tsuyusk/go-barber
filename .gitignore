@@ -13,3 +13,5 @@ tmp/
 .theia/*
 tmp/*
 !tmp/.gitkeep
+
+mobile

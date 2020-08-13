@@ -13,11 +13,7 @@ export default class ProvidersController {
 
     const providers = await listProviders.execute({ user_id });
 
-    const providersWithoutPassword = providers.map(provider =>
-      classToClass(provider),
-    );
-
     // Regra de negócio -> Em services
-    return response.json(providersWithoutPassword);
+    return response.json(classToClass(providers));
   }
 }
