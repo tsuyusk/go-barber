@@ -6,7 +6,7 @@
 ## How to run it in my machine ?
 
 ### Before starting, you must have installed:
-  - [Git]()
+  - [Git](https://git-scm.com/downloads)
   - [Node JS LTS](https://nodejs.org/en/download/)
   - [Docker Desktop](https://www.docker.com/get-started)
 
