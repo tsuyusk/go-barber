@@ -28,8 +28,10 @@
   # Install dependencies
   npm install
   
-  # Create a PostgreSQL instance with docker
-  docker run --name go_barber_postgres -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+  # Create the database instances
+  docker run --name postgres -e -POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+  docker run --name mongo -p 27017:27017 -d -t mongo
+  docker run --name redis -p 6379:6379 -d -t redis:alpine
   
   # Create a database inside this instance called 'gostack_gobarber'
   
