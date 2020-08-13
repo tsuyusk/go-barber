@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const ipv4 = '192.168.0.10';
+
 const api = axios.create({
-  baseURL: 'http://192.168.0.10:3333',
+  baseURL: `http://${ipv4}:3333`,
 });
 
 export default api;

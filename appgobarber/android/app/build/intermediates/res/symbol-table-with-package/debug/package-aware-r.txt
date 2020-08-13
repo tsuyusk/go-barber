@@ -1754,6 +1754,7 @@ layout design_text_input_end_icon
 layout design_text_input_start_icon
 layout dev_loading_view
 layout fps_view
+layout list_item
 layout mtrl_alert_dialog
 layout mtrl_alert_dialog_actions
 layout mtrl_alert_dialog_title
@@ -2172,6 +2173,7 @@ style CardView_Dark
 style CardView_Light
 style ClockTimePickerDialog
 style ClockTimePickerStyle
+style DefaultExplainingPermissionsTheme
 style DialogAnimationFade
 style DialogAnimationSlide
 style EmptyTheme
@@ -2730,6 +2732,7 @@ styleable View android_theme android_focusable paddingEnd paddingStart theme
 styleable ViewBackgroundHelper android_background backgroundTint backgroundTintMode
 styleable ViewPager2 android_orientation
 styleable ViewStubCompat android_id android_layout android_inflatedId
+xml provider_paths
 xml rn_dev_preferences
 xml standalone_badge
 xml standalone_badge_gravity_bottom_end

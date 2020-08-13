@@ -452,6 +452,10 @@
         "source": "C:\\Users\\ZOIUDO\\.gradle\\caches\\transforms-2\\files-2.1\\7b4521e09033db39989053c4a0984cc2\\material-1.1.0\\res\\interpolator-v21\\mtrl_fast_out_linear_in.xml"
     },
     {
+        "merged": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_list_item.xml.flat",
+        "source": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\node_modules\\react-native-image-picker\\android\\build\\intermediates\\packaged_res\\debug\\layout\\list_item.xml"
+    },
+    {
         "merged": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi-v4_abc_ic_menu_share_mtrl_alpha.png.flat",
         "source": "C:\\Users\\ZOIUDO\\.gradle\\caches\\transforms-2\\files-2.1\\2b7e6ebaa515cd43f42fb356f0d1941c\\appcompat-1.1.0\\res\\drawable-xhdpi-v4\\abc_ic_menu_share_mtrl_alpha.png"
     },
@@ -2398,6 +2402,10 @@
     {
         "merged": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\android\\app\\build\\intermediates\\res\\merged\\debug\\anim_design_bottom_sheet_slide_out.xml.flat",
         "source": "C:\\Users\\ZOIUDO\\.gradle\\caches\\transforms-2\\files-2.1\\7b4521e09033db39989053c4a0984cc2\\material-1.1.0\\res\\anim\\design_bottom_sheet_slide_out.xml"
+    },
+    {
+        "merged": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_provider_paths.xml.flat",
+        "source": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\node_modules\\react-native-image-picker\\android\\build\\intermediates\\packaged_res\\debug\\xml\\provider_paths.xml"
     },
     {
         "merged": "C:\\Users\\ZOIUDO\\Documents\\rocketseat\\gostack\\go-barber\\appgobarber\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_design_fab_background.xml.flat",

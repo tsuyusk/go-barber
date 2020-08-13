@@ -11,6 +11,9 @@
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ANDROID" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
@@ -36,6 +39,16 @@
             </intent-filter>
         </activity>
         <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+
+        <provider
+            android:name="com.imagepicker.FileProvider"
+            android:authorities="com.appgobarber.provider"
+            android:exported="false"
+            android:grantUriPermissions="true" >
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

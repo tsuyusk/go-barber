@@ -1,7 +1,11 @@
 {
   "root": true,
+  "env": {
+    "es6": true,
+    "browser": true
+  },
   "extends": [
-    "@react-native-comunity",
+    "@react-native-community",
     "plugin:@typescript-eslint/recommended"
   ],
   "plugins": ["react-hooks"],

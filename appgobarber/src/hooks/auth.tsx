@@ -23,6 +23,7 @@ interface AuthContextState {
 
   signIn: (credentials: SignInCredentials) => Promise<void>;
   signOut(): void;
+  updateUser(user: User): Promise<void>;
 }
 
 interface SignInCredentials {
@@ -55,6 +56,7 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     }
     loadStoragedData();
   }, []);
+
   const signIn = useCallback(async ({ email, password }: SignInCredentials) => {
     const response = await api.post('/sessions', {
       email,
@@ -70,6 +72,18 @@ export const AuthContextProvider: React.FC = ({ children }) => {
     api.defaults.headers.authorization = `Bearer ${token}`;
     setAuthData({ token, user });
   }, []);
+
+  const updateUser = useCallback(
+    async (user: User) => {
+      await AsyncStorage.setItem('@GoBarber/user', JSON.stringify(user));
+      setAuthData({
+        token: authData.token,
+        user,
+      });
+    },
+    [setAuthData, authData.token],
+  );
+
   const signOut = useCallback(async () => {
     await AsyncStorage.multiRemove(['@GoBarber/token', '@GoBarber/user']);
 
@@ -77,7 +91,14 @@ export const AuthContextProvider: React.FC = ({ children }) => {
   }, []);
   return (
     <AuthContext.Provider
-      value={{ name: 'diego', user: authData.user, signIn, signOut, loading }}>
+      value={{
+        name: 'diego',
+        user: authData.user,
+        signIn,
+        signOut,
+        loading,
+        updateUser,
+      }}>
       {children}
     </AuthContext.Provider>
   );
