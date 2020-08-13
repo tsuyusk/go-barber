@@ -9,6 +9,8 @@ tmp/
 .gitpod.Dockerfile
 .gitpod.yml
 
+build/
+
 .theia/*
 tmp/*
 !tmp/.gitkeep
