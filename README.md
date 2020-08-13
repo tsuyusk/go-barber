@@ -5,7 +5,7 @@
   
 ## How to run it in my machine ?
 
-### Before starting, you must have installed:
+### Before starting, You need to have:
   - [Git](https://git-scm.com/downloads)
   - [Node JS LTS](https://nodejs.org/en/download/)
   - [Docker Desktop](https://www.docker.com/get-started)
@@ -61,10 +61,14 @@
   # Install dependencies
   npm install
   
+  # If You are on IOS,
+  cd ios
+  pod install
+  
   # Install the mobile version
   npm run android / npm run ios
 ```
 
-**If the mobile version does not work, You might have to replace the baseURL in appgobarber/src/services/api.ts for 'http://[your-ipv4-here]:3333'**
+**If the mobile version does not work, You might have to replace the ipv4 in appgobarber/src/services/api.ts for your ipv4**
 
 Made with 💜 by tsuyusk
